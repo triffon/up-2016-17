@@ -183,7 +183,7 @@ int sqrtx() {
 	cout << "sqrt(" << x << ") = " << y << endl;
 }
 
-int main() {
+int expx_final() {
 	double x, eps, sum = 0, y = 1;
 	int n = 0;
 	cout << "x = ";cin >> x;
@@ -191,7 +191,57 @@ int main() {
 	do {
 		// имаме y_n, искаме да сметнем y_n+1
 		sum += y; // Натрупваме y_n
-		y *= x /= ++n; // y n+1
+		y *= x / ++n; // y n+1
 	} while (fabs(y) >= eps);
 	cout << "exp(" << x << ") = " << sum << endl;
+}
+
+int pyramid() {
+	int n;
+	cout << "n = ";cin >> n;
+	for(int i = 1; i <= n; i++) {
+		// извежда i-тия пореден ред на пирамидата
+		// т.е. числата от 1 до i, разделени с интервал
+		for(int j = 1; j <= i; j++)
+			cout << j << ' ';
+		// накрая трябва да има символ за нов ред
+		cout << endl;
+	}
+	return 0;
+}
+
+int timer() {
+	int minutes, seconds;
+	cout << "минути: ";cin >> minutes;
+	cout << "секунди: ";cin >> seconds;
+	/*
+	for(;minutes >= 0; minutes--) {
+		// в рамките на минутата секундите да стигнат до 0
+		for(;seconds >=0 ; seconds--) {
+			// cout << minutes << ':';
+			// if (seconds < 10)
+			// 	cout << '0';
+			// cout << seconds << endl;
+			cout << minutes << ':' <<
+					((seconds < 10) ? "0" : "") << seconds << endl;
+		}
+		seconds = 59;
+	}
+	*/
+	while (minutes > 0 || seconds > 0) {
+		cout << minutes << ':' <<
+							((seconds < 10) ? "0" : "") << seconds << endl;
+		if (seconds == 0) {
+			minutes--;
+			seconds = 59;
+		} else
+			seconds--;
+	}
+	// minutes == 0 && seconds == 0
+}
+
+int main() {
+	for(int x = 0; x <= 6; x++)
+		for(int y = x; y <= 6; y++)
+			cout << x << '|' << y << endl;
 }
