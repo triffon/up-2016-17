@@ -240,8 +240,51 @@ int timer() {
 	// minutes == 0 && seconds == 0
 }
 
-int main() {
+int dominoes() {
 	for(int x = 0; x <= 6; x++)
 		for(int y = x; y <= 6; y++)
 			cout << x << '|' << y << endl;
+}
+
+int diffDigits() {
+	int n, m = 0;
+	cout << "n = ";cin >> n;
+	// за всяка цифра
+	// "n не е свършило, но m е свършило"
+	while (n > 0 && m == 0) {
+		// n % 10 е поредната цифра
+		int d = n % 10;
+		n /= 10;
+		// търсим d в останалата част на n
+		m = n;
+		while (m > 0 && m % 10 != d)
+			m /= 10;
+		// НЕ, d не се среща в m: m == 0
+		// ДА, d се среща в m:    m > 0 && d == m % 10
+		// трябва да проверим m > 0
+	}
+	// m > 0: ДА, има повтарящи се цифри
+	// n == 0: НЕ, няма повтарящи се цифри
+	if (m > 0) {
+		cout << "Има повтарящи се цифри\n";
+	} else {
+		cout << "Няма повтарящи се цифри\n";
+	}
+}
+
+void main(void) {
+	int n, m;
+	cout << "n = ";cin >> n;
+	cout << "m = ";cin >> m;
+	while (n > 0) {
+		int d = n % 10;
+		int k = m;
+		while (k > 0 && k % 10 != d) {
+			k /= 10;
+		}
+		// k > 0: d се среща в k
+		if (k > 0)
+			cout << d << endl;
+		n /= 10;
+	}
 }
