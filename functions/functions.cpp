@@ -32,7 +32,7 @@ int testf() {
 	cout << f(5.6) << endl;
 }
 
-double X1, Y1, X2, Y2, X3, Y3;
+double X[3], Y[3];
 
 double enterCoordinate(char xory, int index) {
 	cout << xory << index << " = ";
@@ -42,20 +42,20 @@ double enterCoordinate(char xory, int index) {
 }
 
 void enterTriangle() {
-	X1 = enterCoordinate('x',1);
-	Y1 = enterCoordinate('y',1);
-	X2 = enterCoordinate('x',2);
-	Y2 = enterCoordinate('y',2);
-	X3 = enterCoordinate('x',3);
-	Y3 = enterCoordinate('y',3);
+	for(int i = 0; i < 3; i++) {
+		X[i] = enterCoordinate('x',i + 1);
+		Y[i] = enterCoordinate('y',i + 1);
+	}
 }
 
 double calculateTriangleArea() {
 	// Ще използваме Хероновата формула
-	double a = distance(X1, Y1, X2, Y2);
-	double b = distance(X2, Y2, X3, Y3);
-	double c = distance(X1, Y1, X3, Y3);
-	return heron(a, b, c);
+	double sides[3];
+	int k = 0;
+	for(int i = 0; i < 3; i++)
+		for(int j = i + 1; j < 3; j++)
+			sides[k++] = distance(X[i], Y[i], X[j], Y[j]);
+	return heron(sides[0], sides[1], sides[2]);
 }
 
 void printTriangleArea() {
@@ -63,7 +63,7 @@ void printTriangleArea() {
 }
 
 double distance(double x1, double y1, double x2, double y2) {
-	return sqrt(square(x1 - y1) + square(x2 - y2));
+	return sqrt(square(x1 - x2) + square(y1 - y2));
 }
 
 double square(double x) {
@@ -84,6 +84,27 @@ int main() {
 	enterTriangle();
 	printTriangleArea();
 	return 0;
+}
+
+const int MAX = 10;
+
+int a[MAX];
+
+int readArray() {
+	int n;
+	do {
+	 cout << "n = "; cin >> n;
+	} while (n <= 0 || n > MAX); // n in [1;MAX]
+	for(int i = 0; i < n; i++) {
+		cout << "a[" << i << "] = ";cin >> a[i];
+	}
+	return n;
+}
+
+void printArray(int n) {
+	for(int i = 0; i < n; i++)
+		cout << "a[" << i << "] = " << a[i];
+	cout << endl;
 }
 
 
