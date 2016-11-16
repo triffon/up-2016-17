@@ -86,25 +86,6 @@ int main() {
 	return 0;
 }
 
-const int MAX = 10;
 
-int a[MAX];
-
-int readArray() {
-	int n;
-	do {
-	 cout << "n = "; cin >> n;
-	} while (n <= 0 || n > MAX); // n in [1;MAX]
-	for(int i = 0; i < n; i++) {
-		cout << "a[" << i << "] = ";cin >> a[i];
-	}
-	return n;
-}
-
-void printArray(int n) {
-	for(int i = 0; i < n; i++)
-		cout << "a[" << i << "] = " << a[i];
-	cout << endl;
-}
 
 
