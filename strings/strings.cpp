@@ -46,7 +46,7 @@ int testStings() {
 }
 
 
-int main() {
+int palindrome() {
 	char s[MAX] = "";
 	cin.getline(s, MAX);
 	int n = strlen(s), mid = n / 2 - 1;
@@ -59,4 +59,30 @@ int main() {
 	if (i <= mid)
 		cout << " НЕ";
 	cout << " е палиндром.\n";
+}
+
+bool isLetter(char c) {
+	return 'A' <= c && c <= 'Z' || 'a' <= c && c <= 'z';
+}
+
+int main() {
+	char s[MAX] = "";
+	cin.getline(s, MAX);
+
+	int i = 0, count = 0;
+	bool inWord = false;
+	while (s[i] != '\0') {
+		// if (inWord != isLetter(s[i]))
+		//	inWord = !inWord;
+
+		if (inWord && !isLetter(s[i]))
+			inWord = false;
+		else if (!inWord && isLetter(s[i])) {
+			inWord = true;
+			count++;
+		}
+		i++;
+	}
+	// s[i] == '\0'
+	cout << "Имаме " << count << " думи\n";
 }
