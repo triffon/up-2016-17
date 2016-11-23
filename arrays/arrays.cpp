@@ -6,7 +6,6 @@
  */
 
 #include <iostream>
-#include <cstring>
 using namespace std;
 
 const int MAX = 10;
@@ -144,25 +143,44 @@ int testArrays() {
 }
 
 int main() {
-	const int MAX = 100;
-	char q[6] = "Hello";
-	char s[MAX] = "Test"; // { '\0' };
-	char p[MAX] = "Hello";
-	cout << "s = ";
-	// !!! cin >> s;
-	cin.getline(s, MAX);
-	cout << s << ' ' << (void*)s << endl;
-	cout << p << ' ' << (void*)p << endl;
-	cout << q << ' ' << (void*)q << endl;
-	cout << strlen(s) << endl;
-	char s2[MAX];
-	strcpy(s2, s); // "s2 = s"
-	cout << s2 << endl;
-	cout << strcmp(s, s2) << endl;
-	cout << strcmp(s, p) << endl;
-	cout << (char)strcmp(s, p) << endl;
-	if (strcmp(s, p) > 0) cout << s << " е след " << p << endl;
-	strcat(s, " Goodbye, world!");
-	cout << s << ' ' << s2 << endl;
+	int n, m;
+	int a[MAX], b[MAX], c[2 * MAX];
+
+	do {
+	 cout << "n = "; cin >> n;
+	} while (n <= 0 || n > MAX); // n in [1;MAX]
+	for(int i = 0; i < n; i++) {
+		cout << "a[" << i << "] = ";cin >> a[i];
+	}
+
+	do {
+	 cout << "m = "; cin >> m;
+	} while (m <= 0 || m > MAX); // m in [1;MAX]
+	for(int i = 0; i < m; i++) {
+		cout << "b[" << i << "] = ";cin >> b[i];
+	}
+
+	int i = 0, j = 0, k = 0;
+	while (i < n && j < m)
+		if (a[i] < b[j])
+			c[k++] = a[i++];
+		else
+			c[k++] = b[j++];
+	// i == n || j == m
+	// Точно единият масив е "свършил"
+	// Трябва да прехвърлим другия в C
+
+	// В a има още елементи
+	// да ги прехвърлим в c
+	while (i < n)
+		c[k++] = a[i++];
+
+	while (j < m)
+		c[k++] = b[j++];
+
+	// i == n && j == m && k == m + n
+	for(int i = 0; i < k; i++)
+		cout << "c[" << i << "] = " << c[i] << endl;
+
 	return 0;
 }
