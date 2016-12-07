@@ -3,3 +3,8 @@
 *~
 Debug/
 *.cbp
+bin/
+obj/
+*.cbp
+*.depend
+*.layout
