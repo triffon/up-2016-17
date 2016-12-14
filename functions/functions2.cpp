@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
@@ -92,7 +93,7 @@ void findMinMax(int arr[5], int& min, int& max)
 
     // изчисляваме по някакъв начин минимума и максимума
     // и ги записваме в параметрите min и max.
-    // Понеже те представляват псевдоними, то това е желаният ефект - 
+    // Понеже те представляват псевдоними, то това е желаният ефект -
     // една функция да изчисли две неща и да ги "върне" на извикващата я.
     min = 0;
     max = 42;
@@ -111,8 +112,92 @@ void testMinMax()
     cout << endl;
 }
 
+void printArray(int *a, int n) {
+    for(int i = 0; i < n; i++)
+        cout << a[i] << ' ';
+    cout << endl;
+}
+
+void shiftArray(int a[], int n) {
+    for(int i = 0; i < n - 1; i++)
+        a[i] = a[i+1];
+}
+
+void printMatrix(int (*a)[10], int m, int n) {
+    // cout << sizeof(a) << ' ' << sizeof(*a) << endl;
+    // n = sizeof(*a) / sizeof(int);
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++)
+            cout << a[i][j] << '\t';
+        cout << endl;
+    }
+}
+
+const int MAX = 100;
+
+int readStrings(char strings[][MAX]) {
+    cout << "Въведете брой низове: ";
+    int n;
+    cin >> n;
+    // !!! изчистваме новия ред
+    cin.getline(strings[0], MAX);
+    for(int i = 0; i < n; i++) {
+        cout << "Въведете низ " << (i + 1) << ": ";
+        cin.getline(strings[i], MAX);
+    }
+    return n;
+}
+
+bool searchString(char strings[][MAX], int n, char s[]) {
+    int i = 0;
+    while (i < n && strcmp(strings[i], s) != 0)
+        i++;
+    // !!! НЕ: i == n
+    // !!! ДА: strcmp(strings[i], s) == 0
+    return i < n;
+    // !!! return strcmp(strings[i], s) == 0;
+}
+
+void printStrings(char strings[][MAX], int n) {
+    for(int i = 0; i < n; i++)
+        cout << strings[i] << endl;
+}
+
+void testArrays() {
+    int b[10] = { 1, 5, 7, 8, 10 };
+    printArray(b, 5);
+    printArray(b + 1, 4);
+    shiftArray(b, 5);
+    printArray(b, 4);
+    int c[10][10] = { { 1, 2, 3 }, {4, 5, 6}, {7, 8, 9}};
+    printMatrix(c, 3, 3);
+    char s[10][MAX] = { "abc", "def", "ghi" };
+    int n = readStrings(s);
+    printStrings(s, n);
+    cout << searchString(s, n, "test");
+
+}
+
+int z = 5;
+
+int* f(int y, int* a) {
+    int x = y;
+    // !!! return &x;
+    // !!! return &y;
+    // return &z;
+    return a + 2;
+}
+
+void testPointers() {
+    int a[10] = { 1, 3, 55, 7, 10};
+    int* p = f(3, a);
+    cout << *p << endl;
+}
+
 int main()
 {
-    testSwaps();
-    testMinMax();
+    // testSwaps();
+    // testMinMax();
+    // testArrays();
+    testPointers();
 }
