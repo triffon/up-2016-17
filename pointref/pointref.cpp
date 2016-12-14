@@ -49,7 +49,7 @@ int testPointers() {
 	return 0;
 }
 
-int main() {
+int pointersExample() {
     int a[10], *p = &a[2],
                *pa[2] = { a + 3, &a[6] },
                **q = &pa[1];
@@ -85,4 +85,13 @@ int main() {
     return 0;
 }
 
+int main() {
+    int a = 3;
+    int &b = a;
+    // !!! &b = a;
+    const int &c = b;
+    a++;b++;
+    c++;
+    return 0;
+}
 
