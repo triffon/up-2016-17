@@ -80,7 +80,7 @@ double semiPerimeter(double a, double b, double c) {
 	return (a + b + c) / 2;
 }
 
-int main() {
+int maintest() {
 	enterTriangle();
 	printTriangleArea();
 	return 0;

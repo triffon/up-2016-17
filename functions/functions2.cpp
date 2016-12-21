@@ -194,10 +194,43 @@ void testPointers() {
     cout << *p << endl;
 }
 
+void multiplyMatrices(double A[][MAX], double B[][MAX],
+						double C[][MAX],
+						int m, int n, int r) {
+// A: m x n
+// B: n x r
+// C: m x r
+	for(int i = 0; i < m; i++)
+		for(int j = 0; j < r; j++) {
+			C[i][j] = 0;
+			for(int k = 0; k < n; k++)
+				C[i][j] += A[i][k] * B[k][j];
+		}
+}
+
+char const* our_strchr(char const* s, char c) {
+	while(*s && *s != c)
+		s++;
+	// НЕ: *s == '\0'
+	// ДА: *s == c
+	// if (*s == '\0')
+	if (!*s)
+		return NULL;
+	return s;
+}
+
 int main()
 {
     // testSwaps();
     // testMinMax();
     // testArrays();
-    testPointers();
+    // testPointers();
+    char s[MAX] = "";
+    cout << "s = ";
+    cin.getline(s, MAX);
+    char c = 'o';
+    if (our_strchr(s, c))
+    	cout << "Среща се: " << our_strchr(s, c) << endl;
+    else
+    	cout << "Не се среща!\n";
 }
