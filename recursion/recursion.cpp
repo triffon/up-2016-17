@@ -192,6 +192,32 @@ void quickSort(long a[], int n) {
 	quickSort(a + k + 1, n - k - 1);
 }
 
+/*
+bool equalStrings(char const* s1, char const* s2) {
+	if (*s1 == '\0' && *s2 == '\0')
+		return true;
+//	if (*s1 == '\0' || *s2 == '\0')
+//		return false;
+	if (*s1 != *s2)
+		return false;
+	// *s1 != '\0' && *s2 != '\0' && *s1 == *s2
+	return equalStrings(s1 + 1, s2 + 1);
+}*/
+
+bool equalStrings(char const* s1, char const* s2) {
+	return !*s1 && !*s2 ||
+			*s1 == *s2 && equalStrings(s1 + 1, s2 + 1);
+}
+
+int strcmp(char const* s1, char const *s2) {
+	if (*s1 == '\0' && *s2 == '\0')
+		return 0;
+	if (*s1 != *s2)
+		return *s1 - *s2;
+	// *s1 != '\0' && *s2 != '\0' && *s1 == *s2
+	return strcmp(s1 + 1, s2 + 1);
+}
+
 int main() {
 	long a[MAX] = { 0 };
 	int n;
@@ -203,5 +229,9 @@ int main() {
 	cout << "Различни? " << diff(a, n) << endl;
 	quickSort(a, n);
 	printArray(a, n);
+	cout << equalStrings("hello", "hello") << endl;
+	cout << equalStrings("hello", "hi") << endl;
+	cout << strcmp("hello", "hello") << endl;
+	cout << strcmp("hello", "hi") << endl;
 	return 0;
 }
