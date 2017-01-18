@@ -1,0 +1,10 @@
+3
+Ivan Kolev
+80000
+5.75
+Stefani Stefanova
+60000
+6
+Petar Petrov
+80001
+4.5
